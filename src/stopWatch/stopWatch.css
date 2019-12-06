@@ -1,0 +1,13 @@
+/** @format */
+
+.stop-watch-main-div {
+	max-width: 50%;
+	margin-top: 20vh;
+	margin-left: 20vw;
+	background-color: #f5f8fb;
+}
+
+.stop-watch-content-div {
+	padding-left: 3vw;
+	padding-bottom: 50px;
+}

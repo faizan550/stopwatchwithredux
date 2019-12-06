@@ -1,0 +1,26 @@
+/** @format */
+
+.time-table {
+	text-align: center;
+	width: 100%;
+	border-top: 3px solid #dadada;
+	margin-top: 40px;
+	color: #a1a1a0;
+}
+
+th,
+td {
+	text-align: center;
+	padding: 8px;
+}
+
+.split-time-style,
+.pause-time-style {
+	text-align: left;
+}
+.split-time-style {
+	color: #f2ac47;
+}
+.pause-time-style {
+	color: #fa7991;
+}

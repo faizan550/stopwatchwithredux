@@ -1,0 +1,9 @@
+/** @format */
+
+.split-time {
+	color: #f2a22c;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	font-size: 2vw;
+}
