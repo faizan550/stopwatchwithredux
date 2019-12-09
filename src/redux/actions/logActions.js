@@ -9,7 +9,7 @@ export const splitTime = (actionType, actionTime) => {
 }
 
 export const resetSplitTime = () => {
-  return{
+  return {
     type: RESET_SPLIT_TIME
   }
 }

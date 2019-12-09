@@ -1,17 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import calculateTime from '../../utils';
 import '../LogTable/logTable.css';
 
 const LogTable = (props) => {
 
-  const { logEntry } = props
+  const { splitTimeList } = props
 
   return (
     <div>
-      {(logEntry.length > 0) &&
+      {(splitTimeList.length > 0) &&
         <table className="time-table">
-          {logEntry.map((entry, i) => {
+          {splitTimeList.map((entry, i) => {
             return [
               <tr>
                 <td style={{ textAlign: "left" }}>#{i + 1}
@@ -37,8 +36,4 @@ const LogTable = (props) => {
   )
 }
 
-const mapStateToProps = ({ logReducer: { logEntry } }) => ({
-  logEntry
-})
-
-export default connect(mapStateToProps)(LogTable)
+export default LogTable

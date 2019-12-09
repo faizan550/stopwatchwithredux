@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
-import { startTimer, resetTimer, stopTimer } from '../redux/actions/timerActions'
-import { resetSplitTime } from '../redux/actions/logActions'
+import React, { Component } from "react";
+import { startStopWatch, pauseStopWatch, resetStopWatch } from '../redux/actions/timerActions'
+import { resetSplitTime, splitTime } from '../redux/actions/logActions'
 import { bindActionCreators } from "redux";
 import Buttons from './Buttons/stopWatchButton'
 import { connect } from 'react-redux';
@@ -9,64 +9,53 @@ import LogTable from './LogTable/logTable';
 import SplitTime from './SplitTimer/splitTime';
 import '../stopWatch/stopWatch.css';
 
+class StopWatch extends Component {
 
-let timer = 0
-const StopWatch = (props) => {
+  render() {
+    const {
+      startStopWatch,
+      resetStopWatch,
+      pauseStopWatch,
+      resetSplitTime,
+      stopWatchTime,
+      timerState,
+      splitTime,
+      splitTimeList
+    } = this.props
 
-  const {
-    startTimer,
-    resetTimer,
-    stopTimer,
-    resetSplitTime
-  } = props
-
-  const timerStartRef = useRef(0);
-
-  const startTheTimer = () => {
-    const { timertime } = props;
-    timerStartRef.current = Date.now() - timertime;
-    timer = setInterval(() => {
-      startTimer(Date.now() - timerStartRef.current);
-    }, 1);
-  };
-
-  const stopTheTimer = () => {
-    clearInterval(timer);
-    stopTimer()
-  };
-
-  const resetTheTimer = () => {
-    resetTimer();
-    resetSplitTime();
-  }
-
-  return (
-    <div className="stop-watch-main-div">
-      <div className="stop-watch-content-div">
-        <StopWatchTime />
-        <SplitTime />
-        <Buttons
-          startTimer={startTheTimer}
-          stopTheTimer={stopTheTimer}
-          resetTheTimer={resetTheTimer}
-        />
-        <LogTable />
+    return (
+      <div className="stop-watch-main-div">
+        <div className="stop-watch-content-div">
+          <StopWatchTime stopWatchTime={stopWatchTime} />
+          <SplitTime splitTimeList={splitTimeList} />
+          <Buttons
+            startStopWatch={startStopWatch}
+            pauseStopWatch={pauseStopWatch}
+            resetStopWatch={resetStopWatch}
+            timerState={timerState}
+            stopWatchTime={stopWatchTime}
+            splitTime={splitTime}
+            resetSplitTime={resetSplitTime}
+          />
+          <LogTable splitTimeList={splitTimeList} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-const mapStateToProps = ({ timerReducer: { timertime } }) => ({
-  timertime
+const mapStateToProps = ({ timerReducer: { stopWatchTime, timerState }, logReducer: { splitTimeList } }) => ({
+  stopWatchTime, timerState, splitTimeList
 })
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      startTimer,
-      resetTimer,
-      stopTimer,
-      resetSplitTime
+      startStopWatch,
+      resetStopWatch,
+      pauseStopWatch,
+      resetSplitTime,
+      splitTime
     },
     dispatch
   );
